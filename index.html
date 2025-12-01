@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 80'%3e%3cpath d='M 20,50 C 0,50 0,30 20,30 C 30,10 70,10 80,30 C 100,30 100,50 80,50 Z' fill='white' stroke='%23E2725B' stroke-width='3' stroke-linejoin='round' /%3e%3crect x='20' y='50' width='60' height='20' rx='3' fill='%23E2725B'/%3e%3cpath d='M 50,28 L 52,33 L 57,35 L 52,37 L 50,42 L 48,37 L 43,35 L 48,33 Z' fill='%23FCE9E5' /%3e%3c/svg%3e">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#E2725B" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="PastelerIA" />
+    <title>PastelerIA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --color-primary-50: #FEF6F4;
+        --color-primary-100: #FCE9E5;
+        --color-primary-500: #E2725B;
+        --color-primary-600: #D45D45;
+        --color-primary-800: #9F3924;
+
+        --color-neutral-50: #FAFAF9;
+        --color-neutral-100: #F5F5F4;
+        --color-neutral-200: #E7E5E4;
+        --color-neutral-300: #D6D3D1;
+        --color-neutral-400: #A8A29E;
+        --color-neutral-500: #78716C;
+        --color-neutral-600: #57534E;
+        --color-neutral-700: #44403C;
+        --color-neutral-800: #292524;
+        --color-neutral-900: #1C1917;
+      }
+      /* Prevent pull-to-refresh on mobile to feel more like an app */
+      body {
+        overscroll-behavior-y: none;
+      }
+      
+      /* Hide spin buttons for number inputs */
+      input[type=number]::-webkit-inner-spin-button, 
+      input[type=number]::-webkit-outer-spin-button { 
+        -webkit-appearance: none; 
+        margin: 0; 
+      }
+      input[type=number] {
+        -moz-appearance: textfield;
+      }
+    </style>
+    <script>
+      // POLYFILL CRITICO PARA MOVIL: Define process.env para que no falle la app
+      window.process = window.process || { 
+        env: { 
+          NODE_ENV: 'production',
+          // Si tienes la API key en una variable de entorno del servidor, 
+          // idealmente se inyectaría aquí, pero esto evita el crash inicial.
+          API_KEY: '' 
+        } 
+      };
+
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: {
+                50: 'var(--color-primary-50)',
+                100: 'var(--color-primary-100)',
+                500: 'var(--color-primary-500)',
+                600: 'var(--color-primary-600)',
+                800: 'var(--color-primary-800)',
+              },
+              neutral: {
+                50: 'var(--color-neutral-50)',
+                100: 'var(--color-neutral-100)',
+                200: 'var(--color-neutral-200)',
+                300: 'var(--color-neutral-300)',
+                400: 'var(--color-neutral-400)',
+                500: 'var(--color-neutral-500)',
+                600: 'var(--color-neutral-600)',
+                700: 'var(--color-neutral-700)',
+                800: 'var(--color-neutral-800)',
+                900: 'var(--color-neutral-900)',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+              serif: ['Playfair Display', 'serif'],
+            },
+          },
+        },
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "lucide-react": "https://aistudiocdn.com/lucide-react@^0.553.0",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.29.0",
+    "react-dom": "https://aistudiocdn.com/react-dom@^19.2.0",
+    "jspdf": "https://aistudiocdn.com/jspdf@^2.5.1",
+    "html2canvas": "https://aistudiocdn.com/html2canvas@^1.4.1"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+  <body class="bg-neutral-50">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+    <script>
+      // Manejador de errores visual para móvil
+      window.onerror = function(msg, url, lineNo, columnNo, error) {
+        const root = document.getElementById('root');
+        // Si el root está vacío, significa que React no montó
+        if (root && root.innerHTML.trim() === '') {
+          document.body.innerHTML = '<div style="padding:20px; color:red; font-family:sans-serif;">' +
+            '<h3>Error de Carga</h3>' +
+            '<p>' + msg + '</p>' +
+            '<small>' + url + ':' + lineNo + '</small>' +
+            '</div>';
+        }
+        return false;
+      };
+    </script>
+  </body>
+</html>

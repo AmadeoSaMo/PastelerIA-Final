@@ -1,0 +1,5 @@
+{
+  "name": "Pasteler.IA",
+  "description": "An application for bakeries and pastry shops to manage product costing, profitability, recipes, and raw materials. It includes a Gemini-powered chatbot for assistance.",
+  "requestFramePermissions": []
+}
